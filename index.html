@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<div id="game">
+	<p>Guess what letter I am thinking of..</p>
+	<p class="html">Wins: 0<br>Losses: 0<br>Guesses Left: 9<br>letters Guessed:</p>
+
+</div>
+
+<script type="text/javascript">
+
+
+//Set variables, ORDER OF CODE IMPORTANT MUST BE ON TOP?
+	var wins = 0;
+	var losses = 0;
+	var guessesLeft = 9;
+	var lettersGuessed = "";
+	var html = "Wins: " + wins + "<br>Losses: " + losses + "<br>Guesses Left: " + guessesLeft + "<br>letters Guessed: " + lettersGuessed;
+	//Using the alphabet as a string, select a random string character.
+		var alphabet = "abcdefghijklmnopqrstuvwxyz";
+		var randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+
+
+	document.onkeyup = function() {
+
+		var userGuess = event.key;
+
+	
+
+	
+//Count down number of guesses remaining.
+		if ((guessesLeft > 0) && (userGuess !== randomLetter)){
+			guessesLeft--;
+		}
+
+//Keep track of wins and losses
+		if (userGuess === randomLetter){
+			wins++;
+		} else if (guessesLeft === 0){
+			losses++;
+		} 
+//adding letters guessed to lettersGuessed
+		lettersGuessed = lettersGuessed + userGuess;
+
+
+//if correct letter is guessed or if run out of turns, reset all fields and generate a new random letter
+		if ((lettersGuessed.length === 9 ) || (userGuess === randomLetter)){
+			lettersGuessed = "";
+			guessesLeft = 9
+			randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+		}
+
+		var html = "Wins: " + wins + "<br>Losses: " + losses + "<br>Guesses Left: " + guessesLeft + "<br>letters Guessed: " + lettersGuessed;
+
+		document.querySelector(".html").innerHTML = html;
+	}
+</script>
+</body>
+</html>
+
+
